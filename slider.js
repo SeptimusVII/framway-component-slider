@@ -191,12 +191,16 @@ module.exports = function(){
                     for(var item of slider.itemsFirst){
                         let itemClone = item.cloneNode(true);
                         itemClone.classList.add('dupe','firsts');
+                        if (item.classList.fw__containsAny(fw.components))
+                            itemClone.classList.add('exclude_component');
                         slider.wrapper.append(itemClone);
                     }
                     slider.itemsLast = Array.from(slider.items).slice(slider.items.length - slider.itemsPerRow);
                     for(var item of slider.itemsLast.reverse()){
                         let itemClone = item.cloneNode(true);
                         itemClone.classList.add('dupe','lasts');
+                        if (item.classList.fw__containsAny(fw.components))
+                            itemClone.classList.add('exclude_component');
                         slider.wrapper.prepend(itemClone);
                     }
                     slider.current = slider.itemsPerRow;
