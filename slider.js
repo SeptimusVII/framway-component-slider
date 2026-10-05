@@ -55,7 +55,7 @@ module.exports = function(){
                 let item = this;
                 let slider = e.target.closest('.slider').component ?? false;
                 if (!slider) return false;
-                if (item.classList.contains('slider__item') && item.classList.contains('active')  && e.propertyName == 'opacity') {
+                if (slider.items.indexOf(item) != -1 && item.classList.contains('active')  && e.propertyName == 'opacity') {
                    slider.moving = false;
                    slider.el.classList.remove('moving');
                    slider.log('End of transition. Currently on: '+ slider.current);
@@ -76,7 +76,7 @@ module.exports = function(){
             slider.log('onCreate start');
 
             slider.wrapper   = slider.el.querySelector('.slider__wrapper') ?? utils.htmlToNode('<div class="slider__wrapper"></div>');
-            slider.items     = slider.el.querySelectorAll('.slider__item');
+            slider.items     = slider.el.querySelectorAll('.slider__item,:scope>*:not(.slider__item)');
             slider.moving    = false;
             slider.current   = 0;
             slider.direction = 'next';
