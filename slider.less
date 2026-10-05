@@ -57,8 +57,12 @@
   	.slider[data-transition-type=translate].moving &{
 		transition: translate var(--transition-duration) var(--transition-function);
   	}
+	>*:not(.slider__item){
+		.slider__item();
+	}
 }
 .slider__item{
+	.lcnm();
 	// min-width: var(--items-minwidth,var(--griditem-minwidth));
 	grid-row: 1; grid-column: auto;
   	width: 100%; 
