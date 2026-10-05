@@ -8,9 +8,9 @@ module.exports = function(){
             this.tpl = utils.htmlToNode(require('bundle-tpl:./slider.html')).outerHTML;
 
             this.transitionStep       = 1;
-            this.transitionDuration   = '500ms';
+            this.transitionDuration   = '1000ms';
             this.transitionFunction   = 'ease';
-            this.itemsPerRow          = 2;
+            this.itemsPerRow          = 3;
             this.itemsGap             = '1em';
 
             this.observeCssChanges = true;
