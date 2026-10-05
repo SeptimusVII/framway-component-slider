@@ -1,7 +1,7 @@
 module.exports = function(){
     let Slider = Object.getPrototypeOf(fw).Slider = class Slider extends fw.Component{
         static {
-            this.debug = true;
+            this.debug = false;
             this.createdAt  = "3.0.0";
             this.lastUpdate = "3.0.0";
             this.version = "1.0.0";
@@ -134,6 +134,8 @@ module.exports = function(){
                 document.addEventListener('keyup',e=>{ slider.keyEvent(e);});
 
             slider.el.classList.add('loaded');
+            if (Slider.debug) 
+                slider.el.classList.add('debug');
             slider.log('onCreate ended','',false);
         }
 
