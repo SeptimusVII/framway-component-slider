@@ -1,3 +1,11 @@
+/** 
+TODO
+- touch/drag events
+- arrows
+- nav
+*/
+
+
 module.exports = function(){
     let Slider = Object.getPrototypeOf(fw).Slider = class Slider extends fw.Component{
         static {
@@ -10,7 +18,7 @@ module.exports = function(){
             this.transitionStep       = 1;
             this.transitionDuration   = '1000ms';
             this.transitionFunction   = 'ease';
-            this.itemsPerRow          = 3;
+            this.itemsPerRow          = 1;
             this.itemsGap             = '1em';
 
             this.observeCssChanges = true;
@@ -87,11 +95,13 @@ module.exports = function(){
             slider.auto       = slider.getData('auto',false);
             slider.delay      = parseInt(slider.getData('delay',4000));
             slider.mode       = slider.getData('mode','slider');
-            slider.transition = slider.getData('transition-type','translate');
+            slider.maxHeight  = slider.getData('max-height',false);
             
+            slider.transition = slider.getData('transition-type','translate');
             slider.transitionDuration  = slider.getData('transition-duration', Slider.transitionDuration);
             slider.transitionFunction  = slider.getData('transition-function', Slider.transitionFunction);
             slider.transitionStep      = parseInt(slider.getData('transition-step', Slider.transitionStep));
+            
             slider.itemsPerRow         = parseInt(slider.getData('items-per-row', Slider.itemsPerRow));
             slider.itemsGap            = slider.getData('items-gap', Slider.itemsGap);
             slider.itemsMinWidth       = parseInt(slider.getData('items-minwidth',0));
@@ -102,6 +112,9 @@ module.exports = function(){
             slider.items.forEach((el)=>{
                 slider.wrapper.append(el)
             })
+
+            if (slider.maxHeight) 
+                slider.syncCssValue('--slider-maxheight', 'maxHeight', slider.maxHeight);
 
             if (Slider.observeCssChanges) {
                 slider.observer = new MutationObserver(function(mutations) {
@@ -134,7 +147,7 @@ module.exports = function(){
                 document.addEventListener('keyup',e=>{ slider.keyEvent(e);});
 
             slider.el.classList.add('loaded');
-            if (Slider.debug) 
+            if (slider.debug) 
                 slider.el.classList.add('debug');
             slider.log('onCreate ended','',false);
         }
